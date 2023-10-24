@@ -1,38 +1,128 @@
-.App {
-  text-align: center;
+body{
+    background-color: black;
+    color: aliceblue;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+*{
+    box-sizing: border-box;
+
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+main{
+    max-width: 300px;
+    margin: 20px auto;
+
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+
+form{
+    border:  3px solid #575760;
+    border-radius: 10px;
+    padding: 5px;
+    display: flex;
+    
+
 }
 
-.App-link {
-  color: #61dafb;
+
+
+
+form input[type="text"] {
+    background:none;
+    border:0;
+    padding: 0px 8px;
+    display: block;
+    width: 100%;
+    color: aliceblue;
+
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+
+
+form button{
+
+    background: orange;
+    border: 0;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+div.check{
+    background-color: #f7a14b;
+    border-radius: 10px;
+    padding: 5px 9px;
+    margin-top: 5px;
+    display: flex;
+    align-items: center;
+    transition: opacity .3s linear;
+
+
+}
+
+
+div.check svg{
+    height: 20px;
+    margin-right: 4px;
+    margin-left: 4px;
+    cursor: pointer;
+
+
+}
+
+
+div.check.done{
+    opacity: 0.3;
+}
+
+div.item-name, div.item form{
+    flex-grow: 1;
+}
+
+div.check span{
+    position: relative;
+ 
+
+}
+
+
+div.check span::before{
+    content: '';
+    display: block;
+    width: 0;
+    height: 1px;
+    background-color: aliceblue;
+    position: absolute;
+    top: 10px;
+    transition: width .3s linear;
+}
+
+div.check.done span::before{
+width: 100%;
+}
+
+h1{
+text-align: center;
+
+}
+
+h2{
+    text-align: center;
+}
+
+
+button.Erase{
+    background: none;
+    border: none;
+    display: flex;
+    cursor: pointer;
+}
+button.Erase{
+    fill: red;
+    height: 14px;
+}
+
+div.item input{
+    border: 2px solid white;
+    border-radius: 5px;
+    padding: 2px 4px;
 }
