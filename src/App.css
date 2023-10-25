@@ -126,3 +126,9 @@ div.item input{
     border-radius: 5px;
     padding: 2px 4px;
 }
+
+
+div.navimg{
+   width: 5px;
+   height: 5px; 
+}

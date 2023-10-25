@@ -1,78 +1,35 @@
-import './App.css';
-import ItemForm from './components/ItemForm';
-import Item from './components/Item';
-import { useEffect, useState } from 'react';
+import {useState } from "react";
+import "./App.css";
+import { Routes, Route, Navigate } from "react-router-dom";
+import Navbar from "./components/Navbar";
+import UserProfilePage from "./pages/UserPage";
+import LoginPage from "./pages/LoginPage";
+import SignupPage from "./pages/SignupPage";
+
+import IsPrivate from "./components/IsPrivate";
+import IsAnon from "./components/IsAnon";
+import TaskManagerPage from './pages/TaskManagerPage';
 
 function App() {
-  const [items, setItems] = useState([]);
-
-  useEffect(() => {
-    const storedItems = JSON.parse(localStorage.getItem('items'));
-    if (storedItems) {
-      setItems(storedItems);
-    }
-  }, []);
-
-  useEffect(() => {
-    if (items.length === 0) return;
-    localStorage.setItem('items', JSON.stringify(items));
-  }, [items]);
-
-  function addItem(name) {
-    setItems((prev) => [...prev, { name: name, done: false }]);
-  }
-
-  function removeItem(indexToErase) {
-    setItems((prev) => prev.filter((_, index) => index !== indexToErase));
-  }
-
-
-  function updateItemDone(itemIndex, newDone) {
-    setItems((prev) => {
-      const newItems = [...prev];
-      newItems[itemIndex].done = newDone;
-      return newItems;
-    });
-  }
-
-
-  const numberComplete = items.filter(i => i.done).length;
-  const numberTotal =items.length
-
-function getMessage(){
-  const percentage = numberComplete/numberTotal*100;
-  if (percentage === 0){
-    return 'Lest Start ✍🏼'
-  }
-  if(percentage === 100){
-    return 'You are a Rockstar 🪩'
-  }
-  return "You're almost  D O N E 🧐 "
-}
-
-
-function renameItem(index, newName) {
-  const itemsCopy = JSON.parse(JSON.stringify(items))
- itemsCopy[index].name=newName
- console.log (itemsCopy)
-  setItems(itemsCopy);
-}
-
+ 
   return (
-    <main>
-      <h1>{numberComplete}/{numberTotal} Complete</h1>
-      <h2> {getMessage()}</h2>
-      <ItemForm onAdd={addItem} />
-      {items.map((item, index) => (
-        <Item
-          key={index}
-          {...item}
-          onRename={(newName) => renameItem(index, newName)}
-          onErase={() => removeItem(index)}
-          onToggle={(done) => updateItemDone(index, done)}
-        />
-      ))}
-    </main>
+    <div className="App relative z-20 pt-20">
+      <Navbar  />
+      
+      <div className={`content  relative z-10`}>
+        <Routes>
+          <Route path="/" element={<Navigate to="/dashboard" />} />
+         
+          <Route path="/profile" element={ <IsPrivate><UserProfilePage /></IsPrivate>} />
+          <Route path="/login" element={<IsAnon><LoginPage /></IsAnon>} />
+          <Route path="/signup" element={<IsAnon><SignupPage /></IsAnon>} />
+          <Route path="/taskManager" element={<IsAnon><TaskManagerPage /></IsAnon>}/>
+
+          
+        </Routes>
+      </div>
+
+    </div>
   );
 }
 
