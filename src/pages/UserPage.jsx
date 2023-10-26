@@ -5,7 +5,7 @@ import placeholderImage from "./../components/placeholder.png";
 import { AuthContext } from "../context/auth.context";
 
 
-const API_URL = "http://localhost:3000";
+const API_URL = "http://localhost:5005";
 
 
 

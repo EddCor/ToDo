@@ -2,42 +2,41 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
-const API_URL = "http://localhost:3000";
+const API_URL = "http://localhost:5005";
 
 
 function SignupPage() {
-  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [name, setName] = useState("");
+  const [fullname, setFullname] = useState("");
   const [errorMessage, setErrorMessage] = useState(undefined);
 
   const navigate = useNavigate();
 
-  
-  const handleEmail = (e) => setEmail(e.target.value);
-  const handlePassword = (e) => setPassword(e.target.value);
-  const handleName = (e) => setName(e.target.value);
 
-  
+  const handleUsername = (e) => setUsername(e.target.value);
+  const handlePassword = (e) => setPassword(e.target.value);
+  const handleFullname = (e) => setFullname(e.target.value);
+
+
   const handleSignupSubmit = (e) => {
     e.preventDefault();
-    // Create an object representing the request body
-    const requestBody = { email, password, name };
+    
+    const requestBody = { username, password, fullname };
 
-    // Make an axios request to the API
-    // If POST request is successful redirect to login page
-    // If the request resolves with an error, set the error message in the state
+   
     axios.post(`${API_URL}/auth/signup`, requestBody)
       .then(() => {
         navigate("/login");
       })
       .catch((error) => {
+        console.log(error.response)
         const errorDescription = error.response.data.message;
         setErrorMessage(errorDescription);
       })
   };
 
-  
+
   return (
     <div className="CohortCreatePage p-8 pb-16 mb-10 mt-10 rounded-lg shadow-md flex flex-col h-full relative w-full max-w-3xl mx-auto">
       <div className="flex justify-center bg-white items-center mb-4 pt-8 absolute top-0 left-0 right-0 py-2 bg-gradient-to-r from-gray-200 via-gray-100 to-gray-200 border-b border-gray-300 shadow-sm"></div>
@@ -51,23 +50,23 @@ function SignupPage() {
         </h3>
 
         <label
-          htmlFor="email"
+          htmlFor="username"
           className="text-gray-600 text-left ml-1 -mb-2 text-l font-bold"
         >
-          Email
+          Username
         </label>
         <input
-          type="email"
-          name="email"
-          id="email"
-          value={email}
-          onChange={handleEmail}
+          type="username"
+          name="username"
+          id="username"
+          value={username}
+          onChange={handleUsername}
           className="border rounded p-2 w-full mb-6"
           autoComplete="off"
         />
 
         <label
-          htmlFor="password"
+          htmlFor="passwordHash"
           className="text-gray-600 text-left ml-1 -mb-2 text-l font-bold"
         >
           Password
@@ -82,21 +81,21 @@ function SignupPage() {
           autoComplete="off"
         />
 
-<label
+        <label
           htmlFor="name"
           className="text-gray-600 text-left ml-1 -mb-2 text-l font-bold"
         >
-          Name
+          Fullname
         </label>
         <input
           type="text"
-          name="name"
-          id="name"
-          value={name}
-          onChange={handleName}
+          name="fullname"
+          id="fullname"
+          value={fullname}
+          onChange={handleFullname}
           className="border rounded p-2 w-full mb-6"
           autoComplete="off"
-        />        
+        />
 
         <button
           type="submit"

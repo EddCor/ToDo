@@ -3,10 +3,10 @@ import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
 
-const API_URL = "http://localhost:3000";
+const API_URL = "http://localhost:5005";
 
 function LoginPage() {
-  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState(undefined);
 
@@ -14,21 +14,21 @@ function LoginPage() {
 
   const { storeToken, authenticateUser } = useContext(AuthContext);
 
-  const handleEmail = (e) => setEmail(e.target.value);
+  const handleUsername = (e) => setUsername(e.target.value);
   const handlePassword = (e) => setPassword(e.target.value);
 
   const handleLoginSubmit = (e) => {
     e.preventDefault();
-    const requestBody = { email, password };
+    const requestBody = { username, password };
 
     axios
       .post(`${API_URL}/auth/login`, requestBody)
       .then((response) => {
-        console.log("JWT token", response.data.authToken);
+        console.log("JWT token", response.data);
 
-        storeToken(response.data.authToken);
+        storeToken(response.data.token);
         authenticateUser();
-        navigate("/");
+        navigate("/taskManager");
       })
       .catch((error) => {
         const errorDescription = error.response.data.message;
@@ -49,17 +49,17 @@ function LoginPage() {
         </h3>
 
         <label
-          htmlFor="email"
+          htmlFor="username"
           className="text-gray-600 text-left ml-1 -mb-2 text-l font-bold"
         >
-          Email
+          User Name
         </label>
         <input
-          type="email"
-          name="email"
-          id="email"
-          value={email}
-          onChange={handleEmail}
+          type="username"
+          name="username"
+          id="username"
+          value={username}
+          onChange={handleUsername}
           className="border rounded p-2 w-full mb-6"
           autoComplete="off"
         />
