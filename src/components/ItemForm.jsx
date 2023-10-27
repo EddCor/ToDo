@@ -11,7 +11,7 @@ export default function ItemForm({ onAdd }) {
   return (
     <form onSubmit={handleSubmit}>
       <button>+</button>
-      <input type="text"
+      <input id= "taskInput"type="text"
         value={itemName}
         onChange={ev => setItemName(ev.target.value)}
         placeholder="Next item"

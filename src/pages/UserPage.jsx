@@ -1,6 +1,5 @@
 import { useEffect, useState, useContext } from "react";
 import axios from "axios";
-import placeholderImage from "./../components/placeholder.png";
 
 import { AuthContext } from "../context/auth.context";
 
@@ -51,12 +50,7 @@ function UserProfilePage() {
       <div className="bg-white p-8 rounded-lg shadow-md mb-6">
         {userProfile && (
           <>
-            {/* <img className="w-32 h-32 rounded-full object-cover mb-4" src={student.image} alt="profile-photo" /> */}
-            <img
-            src={placeholderImage}
-            alt="profile-photo"
-            className="rounded-full w-32 h-32 object-cover border-2 border-gray-300"
-          />            
+                    
             <h1 className="text-2xl mt-4 font-bold absolute">{userProfile.name}</h1>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-24 mb-4 border-b pb-4">

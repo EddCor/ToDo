@@ -9,23 +9,19 @@ import SignupPage from "./pages/SignupPage";
 import IsPrivate from "./components/IsPrivate";
 import IsAnon from "./components/IsAnon";
 import TaskManagerPage from './pages/TaskManagerPage';
+import Navbar from "./components/Navbar";
 
 function App() {
  
   return (
+   
 
     <>
-    <nav>
-      <ul>
-        <li><Link to="/signup">SignUp</Link> </li>
-        <li><Link to="/login">Login</Link> </li>
-        <li><Link to="/profile">Profile</Link> </li>
-      </ul>
-    </nav>
-      
+    
+    <Navbar/>
      
         <Routes>
-          <Route path="/" element={<Navigate to="/dashboard" />} />
+          {/* <Route path="/" element={<Navigate to="/dashboard" />} /> */}
          
           <Route path="/profile" element={ <IsPrivate><UserProfilePage /></IsPrivate>} />
           <Route path="/login" element={<IsAnon><LoginPage /></IsAnon>} />

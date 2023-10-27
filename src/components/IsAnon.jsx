@@ -10,7 +10,7 @@ function IsAnon({ children }) {
 
   if (isLoggedIn) {
 
-    return <Navigate to="/" />;
+    return <Navigate to="/taskManager" />;
   } else {
 
     return children;

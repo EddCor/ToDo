@@ -4,6 +4,9 @@ import './../components/ItemForm';
 import { useEffect, useState } from 'react';
 import ItemForm from '../components/ItemForm';
 import Item from '../components/Item';
+import "../styles/TaskManagerPage.css";
+
+
 
 const API_URL = "http://localhost:5005";
 
