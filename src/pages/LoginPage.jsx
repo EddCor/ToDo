@@ -5,6 +5,7 @@ import { AuthContext } from "../context/auth.context";
 import "../styles/LoginPage.css";
 
 
+
 const API_URL = "http://localhost:5005";
 
 function LoginPage() {

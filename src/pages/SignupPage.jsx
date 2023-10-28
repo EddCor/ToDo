@@ -67,7 +67,7 @@ function SignupPage() {
           autoComplete="off"
         />
         <label htmlFor="fullname" className="input-label">
-          Fullname
+          Full name
         </label>
         <input
           type="text"

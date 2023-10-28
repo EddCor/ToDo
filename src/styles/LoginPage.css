@@ -1,15 +1,30 @@
-/* LoginPage.css
+
 
 .LoginPage {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
-    min-height: 100vh;
-    background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+    justify-content: center;
+    height: 100vh;
+    background: linear-gradient(to bottom right, #0079bf, #00c2e0);
+    position: relative;
     font-family: 'Roboto', sans-serif;
   }
-  
-  .login-container {
+
+  .bg-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    opacity: 0.7; 
+    z-index: -1;
+  }
+
+
+
+  .login-form {
+    
     background: rgba(255, 255, 255, 0.9);
     padding: 20px;
     border-radius: 10px;
@@ -17,6 +32,16 @@
     max-width: 400px;
     width: 100%;
     text-align: center;
+  } 
+
+  .login-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
   }
   
   .login-title {
@@ -24,8 +49,8 @@
     font-weight: bold;
     color: #0079bf;
     margin-bottom: 20px;
-  }
-  
+  } 
+/*   
   .input-label {
     font-size: 18px;
     font-weight: bold;
@@ -47,7 +72,7 @@
   
   .input-field:focus {
     border-bottom: 2px solid #00c2e0;
-  }
+  } */
   
   .login-button {
     background: #00c2e0;
@@ -84,4 +109,4 @@
     color: #00c2e0;
     font-size: 20px;
   }
-   */
+  
