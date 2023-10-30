@@ -1,13 +1,54 @@
 import { useState } from "react";
+import axios from "axios";
 
 
-export default function ItemForm({ onAdd }) {
+
+
+const API_URL = "http://localhost:5005";
+
+export default function ItemForm({ reload }) {
+
+
+  
   const [itemName, setItemName] = useState('');
-  function handleSubmit(ev) {
+  const [errorMessage, setErrorMessage] = useState(undefined);
+
+  const handleSubmit= async(ev) => {
     ev.preventDefault();
-    onAdd(itemName);
+   
     setItemName('')
-  }
+   
+    
+    const payload = {itemName};
+    let token = localStorage.getItem("authToken");
+   
+
+    try {
+      const response = await fetch(`${API_URL}/task`, {
+        method: "POST",
+        body: JSON.stringify(payload),
+        headers: {
+          "Content-type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      console.log(response);
+      if (response.ok) {
+        const parsed = await response.json();
+        console.log(parsed);       
+        setItemName("");
+        reload ();
+      }
+    } catch (error) {
+      console.log(error);
+    }
+
+  };
+
+
+
+  
+  
   return (
     <form onSubmit={handleSubmit}>
       <button>+</button>

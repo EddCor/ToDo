@@ -28,11 +28,7 @@ function AuthProviderWrapper(props) {
           setUser(user);
         })
         .catch((error) => {
-          if (error) {
-            console.log(error)
-            setAuthError(error.response.data.message);
-            return;
-          }
+       localStorage.removeItem("authToken")
           setIsLoggedIn(false);
           setIsLoading(false);
           setUser(null);

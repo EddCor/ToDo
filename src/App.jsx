@@ -10,6 +10,7 @@ import IsPrivate from "./components/IsPrivate";
 import IsAnon from "./components/IsAnon";
 import TaskManagerPage from './pages/TaskManagerPage';
 import Navbar from "./components/Navbar";
+import ItemForm from "./components/ItemForm";
 
 function App() {
  
@@ -23,10 +24,12 @@ function App() {
         <Routes>
           {/* <Route path="/" element={<Navigate to="/dashboard" />} /> */}
          
-          <Route path="/profile" element={ <IsPrivate><UserProfilePage /></IsPrivate>} />
+          <Route path="/" element={ <IsPrivate><UserProfilePage /></IsPrivate>} />
           <Route path="/login" element={<IsAnon><LoginPage /></IsAnon>} />
           <Route path="/signup" element={<IsAnon><SignupPage /></IsAnon>} />
           <Route path="/taskManager" element={<IsPrivate><TaskManagerPage /></IsPrivate>}/>
+          <Route path="/task" element={<IsPrivate><ItemForm /></IsPrivate>} />
+
 
         </Routes>
      </>

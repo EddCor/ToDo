@@ -15,7 +15,7 @@ function LoginPage() {
 
   const navigate = useNavigate();
 
-  const { storeToken, authenticateUser } = useContext(AuthContext);
+  const { isLoggedIn, storeToken, authenticateUser, logOutUser, authError } = useContext(AuthContext);
 
   const handleUsername = (e) => setUsername(e.target.value);
   const handlePassword = (e) => setPassword(e.target.value);
@@ -27,9 +27,7 @@ function LoginPage() {
     axios
       .post(`${API_URL}/auth/login`, requestBody)
       .then((response) => {
-        console.log("JWT token", response.data);
-
-        storeToken(response.data.token);
+       storeToken(response.data.token);
         authenticateUser();
         navigate("/taskManager");
       })
@@ -67,18 +65,23 @@ function LoginPage() {
           onChange={handlePassword}
           className="input-field"
           autoComplete="off"
-        />
-        <button type="submit" className="login-button">
-          Log In
-        </button>
-      </form>
-      {errorMessage && <p className="error-message">{errorMessage}</p>}
-      <p className="login-text">Don't have an account yet?</p>
-      <Link to="/signup" className="signup-link">
-        Sign Up
-      </Link>
-    </div>
-  );
-}
+          />
+          <button type="submit" className="login-button">
+            Log In
+          </button>
+          {isLoggedIn && (
+            <button onClick={logOutUser} className="logout-button">
+              Log Out
+            </button>
+          )}
+        </form>
+        {authError && <p className="error-message">{authError}</p>}
+        <p className="login-text">Don't have an account yet?</p>
+        <Link to="/signup" className="signup-link">
+          Sign Up
+        </Link>
+      </div>
+    );
+  }
 
 export default LoginPage;
