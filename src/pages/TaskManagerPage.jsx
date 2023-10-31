@@ -13,9 +13,13 @@ const API_URL = "http://localhost:5005";
 function TaskManagerPage() {
   const [items, setItems] = useState([]);
   const token = localStorage.getItem("authToken")
+  console.log(token)
+
   const getItems= ()=>{
-    fetch(`${API_URL}/task/userTask`, {headers: {
-      'Content-Type': 'application/json',Authorization: `Bearer ${token}`
+    fetch(`${API_URL}/task/userTask`, {
+      headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`
     }})
     .then((response) => response.json())
     .then((data) => setItems(data))
@@ -27,31 +31,10 @@ function TaskManagerPage() {
 }, []);
 console.log(items)
 
-  //   const storedItems = JSON.parse(localStorage.getItem('items'));
-  //   if (storedItems) {
-  //     setItems(storedItems);
-  //   }
-  // }, []);
 
-  // useEffect(() => {
-  //   if (items.length === 0) return;
-  //   localStorage.setItem('items', JSON.stringify(items));
-  // }, [items]);
-
-  // function addItem(name) {
-  //   setItems((prev) => [...prev, { name: name, done: false }]);
-  // }
-
-
-
-
-  // function removeItem(indexToErase) {
-  //   setItems((prev) => prev.filter((_, index) => index !== indexToErase));
-  // }
-
+  
 
   function removeItem(itemId) {
-    // Delete the item on the backend and update the state
     fetch(`${API_URL}/api/items/${itemId}`, {
       method: 'DELETE',
     })
@@ -70,10 +53,11 @@ console.log(items)
   // }
   function updateItemDone(itemId, newDone) {
     // Update the item's "done" property on the backend and update the state
-    fetch(`${API_URL}/api/items/${itemId}`, {
+    fetch(`${API_URL}/taskDone/${itemId}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
+        authorization: `Bearer ${token}`,
       },
       body: JSON.stringify({ done: newDone }),
     })
@@ -87,7 +71,7 @@ console.log(items)
       .catch((error) => console.error('Error updating item:', error));
   }
 
-  // const numberComplete = items.filter(i => i.done).length;
+  
   const numberComplete = items.filter((item) => item.done).length;
   const numberTotal = items.length
 
@@ -112,43 +96,25 @@ console.log(items)
   // console.log(items[0])
 
   function renameItem(itemId, newName) {
-    // Update the item's name on the backend and update the state
-    fetch(`${API_URL}/api/items/${itemId}`, {
+    const token = localStorage.getItem("authToken")
+
+    fetch(`${API_URL}/task/${itemId}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
+        authorization: `Bearer ${token}`,
       },
       body: JSON.stringify({ name: newName }),
     })
-      .then(() =>
-        setItems((prevItems) =>
-          prevItems.map((item) =>
-            item._id === itemId ? { ...item, name: newName } : item
-          )
-        )
-      )
-      .catch((error) => console.error('Error renaming item:', error));
-  }
-
-
-
-//   return (
-//     <main>
-//       <h1>{numberComplete}/{numberTotal} Complete</h1>
-//       <h2> {getMessage()}</h2>
-//       <ItemForm onAdd={addItem} />
-//       {items.map((item, index) => (
-//         <Item
-//           key={index}
-//           {...item}
-//           onRename={(newName) => renameItem(index, newName)}
-//           onErase={() => removeItem(index)}
-//           onToggle={(done) => updateItemDone(index, done)}
-//         />
-//       ))}
-//     </main>
-//   );
-// }
+    .then((response) => {
+      if (response.ok) {
+        getItems();
+      } else {
+        console.error('Error renaming item:', response);
+      }
+    })
+    .catch((error) => console.error('Error updating item:', error));
+}
 
 
 return (
@@ -162,9 +128,10 @@ return (
       <Item
         key={item._id}
         {...item}
-        onRename={(newName) => renameItem(item._id, newName)}
+       _id={item._id} 
+        onRename={renameItem}
         onErase={getItems}
-        onToggle={(done) => updateItemDone(item._id, done)}
+        onToggle={()=>updateItemDone(item._id, !item.done)}
       />
     ))}
   </main>
