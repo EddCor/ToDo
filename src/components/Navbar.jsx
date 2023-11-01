@@ -22,7 +22,7 @@ function NavBar() {
         <img src={logoImage} alt="Logo" className="logo-icon" />
       </div>
       <ul>
-      <li><Link to="/" className="nav-button">Home</Link></li>
+      <li><Link to="/homepage" className="nav-button">Home</Link></li>
       <li><Link to="/signup" className="nav-button">SignUp</Link> </li>
       <li><Link to="/login" className="nav-button">Login</Link></li>
       {isLoggedIn ? (

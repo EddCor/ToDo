@@ -2,7 +2,7 @@ import {useState } from "react";
 import "./App.css";
 import { Link,Routes, Route, Navigate } from "react-router-dom";
 
-import UserProfilePage from "./pages/UserPage";
+// import UserProfilePage from "./pages/UserPage";
 import LoginPage from "./pages/LoginPage";
 import SignupPage from "./pages/SignupPage";
 
@@ -11,6 +11,7 @@ import IsAnon from "./components/IsAnon";
 import TaskManagerPage from './pages/TaskManagerPage';
 import Navbar from "./components/Navbar";
 import ItemForm from "./components/ItemForm";
+import Homepage from "./pages/HomePage";
 
 function App() {
  
@@ -22,9 +23,8 @@ function App() {
     <Navbar/>
      
         <Routes>
-          {/* <Route path="/" element={<Navigate to="/dashboard" />} /> */}
-         
-          <Route path="/" element={ <IsPrivate><UserProfilePage /></IsPrivate>} />
+          <Route path="/" element={<Navigate to="/homepage" />} />
+          <Route path="/homepage" element= {<Homepage  />}/>
           <Route path="/login" element={<IsAnon><LoginPage /></IsAnon>} />
           <Route path="/signup" element={<IsAnon><SignupPage /></IsAnon>} />
           <Route path="/taskManager" element={<IsPrivate><TaskManagerPage /></IsPrivate>}/>
