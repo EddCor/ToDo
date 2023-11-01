@@ -6,7 +6,7 @@ export default function Item({_id,itemName,done, onToggle, onErase, onRename }) 
   
   const [edit, setEdit] = useState(false) 
   const [itemNewName, setItemNewName] = useState(itemName) 
-  const API_URL = "http://localhost:5005";
+  const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5005";
 
 
 console.log(_id)
@@ -28,6 +28,26 @@ console.log(_id)
       console.error("Error renaming item:", error);
     }
   };
+
+
+  // function updateItemDone(itemId, newDone) {
+  //   // Update the item's "done" property on the backend and update the state
+  //   fetch(`${API_URL}/api/items/${itemId}`, {
+  //     method: 'PUT',
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //     },
+  //     body: JSON.stringify({ done: newDone }),
+  //   })
+  //     .then(() =>
+  //       setItems((prevItems) =>
+  //         prevItems.map((item) =>
+  //           item._id === itemId ? { ...item, done: newDone } : item
+  //         )
+  //       )
+  //     )
+  //     .catch((error) => console.error('Error updating item:', error));
+  // }
 
   return (
     <div className={`check ${done ? 'done' : 'not-done'}`}>
