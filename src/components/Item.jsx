@@ -6,7 +6,7 @@ export default function Item({_id,itemName,done, onToggle, onErase, onRename }) 
   
   const [edit, setEdit] = useState(false) 
   const [itemNewName, setItemNewName] = useState(itemName) 
-  const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5005";
+  const API_URL = process.env.REACT_APP_API_URL || "http://localhost:5005";
 
 
 console.log(_id)

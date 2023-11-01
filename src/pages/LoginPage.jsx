@@ -6,7 +6,7 @@ import "../styles/LoginPage.css";
 
 
 
-const API_URL = process.env.VITE_API_URL || "http://localhost:5005";
+const API_URL = process.env.REACT_APP_API_URL || "http://localhost:5005";
 
 function LoginPage() {
   const [username, setUsername] = useState("");
